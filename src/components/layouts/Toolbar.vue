@@ -1,9 +1,16 @@
 <template>
   <q-toolbar class="justify-center">
-    <q-tabs v-model="tab" dense inline-label narrow-indicator shrink :class="isMobile ? 'justify-between' : ''">
+    <q-tabs
+      v-model="tab"
+      dense
+      inline-label
+      narrow-indicator
+      shrink
+      :class="small ? 'justify-between' : undefined"
+    >
       <q-route-tab
-        class="text-accent"
-        :label="isMobile ? '' : 'Projects'"
+        :class="tab === 'Projects' ? 'text-accent' : 'text-green-4'"
+        :label="small ? undefined : 'Projects'"
         to="/projects"
         name="Projects"
         icon="mdi-github-box"
@@ -13,8 +20,8 @@
       <q-separator inset dark vertical />
 
       <q-route-tab
-        class="text-accent"
-        :label="isMobile ? '' : 'Skills'"
+        :class="tab === 'Skills' ? 'text-accent' : 'text-green-4'"
+        :label="small ? undefined : 'Skills'"
         to="/skills"
         name="Skills"
         icon="mdi-tools"
@@ -23,15 +30,22 @@
 
       <q-separator inset dark vertical />
 
-      <q-route-tab class="text-accent" :label="isMobile ? 'Dan' : 'Dan Hjartvar'" to="/" name="Home" no-caps />
+      <q-route-tab
+        :class="tab === 'Home' ? 'text-accent' : 'text-green-4'"
+        :label="small ? undefined : 'About'"
+        to="/"
+        name="Home"
+        icon="mdi-account"
+        no-caps
+      />
 
       <q-separator inset dark vertical />
 
       <q-route-tab
-        class="text-accent"
-        :label="isMobile ? '' : 'Work'"
-        to="/work"
-        name="Work"
+        :class="tab === 'Experience' ? 'text-accent' : 'text-green-4'"
+        :label="small ? undefined : 'Experience'"
+        to="/experience"
+        name="Experience"
         icon="mdi-briefcase"
         no-caps
       />
@@ -39,8 +53,8 @@
       <q-separator inset dark vertical />
 
       <q-route-tab
-        class="text-accent"
-        :label="isMobile ? '' : 'Education'"
+        :class="tab === 'Education' ? 'text-accent' : 'text-green-4'"
+        :label="small ? undefined : 'Education'"
         to="/education"
         name="Education"
         icon="mdi-school"
@@ -53,10 +67,14 @@
 <script>
 export default {
   name: 'Toolbar',
-  props: ['isMobile'],
   data() {
     return {
       tab: 'Home'
+    }
+  },
+  computed: {
+    small() {
+      return this.$q.screen.lt.md
     }
   }
 }
