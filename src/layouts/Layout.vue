@@ -1,11 +1,11 @@
 <template>
-  <q-layout view="lHh Lpr lFf" class="bg-secondary">
-    <q-header elevated id="content-desktop">
-      <Toolbar :isMobile="false" />
+  <q-layout view="lHh Lpr lFf" class="bg-grey-9">
+    <q-header elevated v-if="!small">
+      <Toolbar />
     </q-header>
 
-    <q-footer id="content-mobile">
-      <Toolbar :isMobile="true" />
+    <q-footer v-if="small">
+      <Toolbar />
     </q-footer>
 
     <q-page-container>
@@ -15,20 +15,14 @@
 </template>
 
 <style>
-#content-desktop {
-  display: block;
+.page {
+  margin-left: 20%;
+  margin-right: 20%;
+  padding: 1%;
+  background-color: #242424;
 }
-#content-mobile {
-  display: none;
-}
-
-@media screen and (max-width: 768px) {
-  #content-desktop {
-    display: none;
-  }
-  #content-mobile {
-    display: block;
-  }
+.smallPage {
+  padding: 2%;
 }
 </style>
 
@@ -39,6 +33,11 @@ export default {
   name: 'Layout',
   components: {
     Toolbar
+  },
+  computed: {
+    small() {
+      return this.$q.screen.lt.md
+    }
   }
 }
 </script>
