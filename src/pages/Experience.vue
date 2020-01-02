@@ -4,6 +4,6 @@
 
 <script>
 export default {
-  name: 'WorkPage'
+  name: 'ExperiencePage'
 }
 </script>
